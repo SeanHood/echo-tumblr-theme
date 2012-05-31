@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--
+		Echo v1.2
+		Mon October 10th, 2010
+		Design by Sean Hood
+		http://snhd.me
+	-->
+
+	<meta charset="utf-8" />
+	{block:IndexPage}
+	<title>{Title}</title>
+	{block:Description}
+	<meta name="description" content="{MetaDescription}" />
+	{/block:Description}
+	{/block:IndexPage}
+	{block:PostSummary}<title>{PostSummary} - {Title}</title>{/block:PostSummary}
+	
+	<link rel="stylesheet" href="echo.css" />
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
+	<link rel="shortcut icon" href="{Favicon}">
+		
+	<meta name="color:Background Colour" content="#ebebeb" />
+	<meta name="color:Text Colour" content="#595959" />
+	<meta name="color:Link Colour" content="#222222" />
+	<meta name="if:Show Dates On Posts" content="1" />
+	<meta name="text:Google Analytics ID" content=""/>
+	
+	<style type="text/css">
+		body {
+			background: {color:Background Colour};
+			color: {color:Text Colour};
+		}
+		a {
+			color: {color:Link Colour};
+		}
+		.header h1 {
+			color: {color:Text Colour};
+		}
+		{CustomCSS}
+	</style>
+</head>
+<body>
+
+<div id="wrap">
+
+<div class="header">
+<h1><a href="/">{Title}</a></h1>
+</div>
+
+<div class="content">
+
+<div class="posts">
+	{block:Posts}
+	
+	{block:Text}
+	<div class="post text">
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		<div class="post_content">
+			{block:Title}
+			<h3><a href="{Permalink}">{Title}</a></h3>
+			{/block:Title}
+			
+			{Body}
+		</div>
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			{block:ContentSource}<span class="source">Source: {SourceLink}</span>{/block:ContentSource}
+			{block:HasTags}
+			<ul class="tags">
+				{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{block:Tags}
+			</ul>
+			{/block:HasTags}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{/block:Text}
+
+	{block:Photo}
+	<div class="post photo">
+		<div class="post_photo">
+			{LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}
+		</div>
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		{block:Caption}
+		<div class="post_content">
+			{Caption}
+		</div>
+		{/block:Caption}
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			{block:ContentSource}<span class="source">Source: {SourceLink}</span>{/block:ContentSource}
+			{block:HasTags}
+			<ul class="tags">
+				{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{block:Tags}
+			</ul>
+			{/block:HasTags}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{/block:Photo}
+
+	{block:Quote}
+	<div class="post quote">
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		<div class="post_content">
+			<blockquote>{Quote}</blockquote>
+			{block:Source}
+			<span class="source">&mdash; {Source}</span>
+			{block:Source}
+		</div>
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			{block:ContentSource}<span class="source">Source: {SourceLink}</span>{/block:ContentSource}
+			{block:HasTags}
+			<ul class="tags">
+				{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{block:Tags}
+			</ul>
+			{/block:HasTags}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{/block:Quote}
+
+	{block:Link}
+	<div class="post link">
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		<div class="post_content">
+			<h3><a href="{URL}">{Name}</a></h3>
+
+			{block:Description}{Description}{/block:Description}
+		</div>
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			{block:ContentSource}<span class="source">Source: {SourceLink}</span>{/block:ContentSource}
+			{block:HasTags}
+			<ul class="tags">
+				{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{block:Tags}
+			</ul>
+			{/block:HasTags}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{/block:Link}
+
+	{block:Chat}
+	<div class="post chat">
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		<div class="post_content">
+			{block:Title}
+			<h3><a href="{Permalink}">{Title}</a></h3>
+			{/block:Title}
+			<dl>
+				{block:Lines}
+				{block:Label}<dt>{Label}</dt>{/block:Label}
+				<dd>{Line}</dd>
+				{/block:Lines}
+			</dl>
+		</div>
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			{block:ContentSource}<span class="source">Source: {SourceLink}</span>{/block:ContentSource}
+			{block:HasTags}
+			<ul class="tags">
+				{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{block:Tags}
+			</ul>
+			{/block:HasTags}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{/block:Chat}
+
+	{block:Audio}
+	<div class="post audio">
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		<div class="post_content">
+			<div class="player">
+				{AudioPlayerWhite} <span class="plays">{PlayCountWithLabel}</span>
+			</div>
+			{block:Caption}{Caption}{/block:Caption}
+		</div>
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			{block:ContentSource}<span class="source">Source: {SourceLink}</span>{/block:ContentSource}
+			{block:HasTags}
+			<ul class="tags">
+				{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{block:Tags}
+			</ul>
+			{/block:HasTags}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{/block:Audio}
+
+	{block:Video}
+	<div class="post video">
+		<div class="post_video">
+		{Video-500}
+		</div>
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		{block:Caption}
+		<div class="post_content">
+			{Caption}
+		</div>
+		{/block:Caption}
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			
+			{block:ContentSource}<span class="source">Source: {SourceLink}</span>{/block:ContentSource}{block:HasTags}
+			<ul class="tags">
+				{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{block:Tags}
+			</ul>
+			{/block:HasTags}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{block:Video}
+
+	{block:Answer}
+	<div class="post text ask">
+		{block:IfShowDatesOnPosts}{block:Date}<div class="date"><a href="{Permalink}" title="{DayOfMonth}{DayOfMonthSuffix} of {Month}, {12Hour}:{Minutes}{AmPm}">{TimeAgo}</a></div>{/block:Date}{/block:IfShowDatesOnPosts}
+		<div class="post_content">
+			<h3>{Asker} asked: {Question}</h3>
+			{Answer}
+		</div>
+		<div class="post_footer">
+			{block:IfNotShowDatesOnPosts}<div class="permalink"><a href="{Permalink}" title="{TimeAgo}">&rarr;</a></div>{/block:IfNotShowDatesOnPosts}
+			{block:NoteCount}<span class="notes"><a href="{Permalink}#notes">{NoteCountWithLabel}</a></span>{/block:NoteCount}
+		</div>
+		{block:PostNotes}
+		<div id="notes">
+			{PostNotes}
+		</div>
+		{/block:PostNotes}
+	</div>
+	{/block:Answer}
+	
+	{/block:Posts}
+	
+	{block:Pagination}
+	<div class="pagination">
+		<span class="newer">{block:PreviousPage}<a href="{PreviousPage}">Newer.</a>{/block:PreviousPage}</span>
+		
+		<span class="current">{CurrentPage}/{TotalPages}</span>
+		
+		<span class="older">{block:NextPage}<a href="{NextPage}">Older.</a>{/block:NextPage}</span>
+	</div>
+	{/block:Pagination}
+</div>
+
+<div class="sidebar">
+	{block:Description}
+	<div class="description">
+		<h3>{lang:About}.</h3>
+		{Description}
+	</div>
+	{block:Description}
+	
+	<div class="links">
+		<a href="/archive">Archive.</a>
+		<a href="{RSS}">RSS.</a>
+		{block:AskEnabled}<a href="/ask">Ask.</a>{/block:AskEnabled}
+		{block:SubmissionsEnabled}<a href="/submit">Submit.</a>{/block:SubmissionsEnabled}
+	</div>
+</div>
+
+</div>
+</div>
+	<div class="footer">
+		<p><a href="http://www.tumblr.com/theme/11333">Echo</a> <span class="by">by</span> <a href="http://snhd.me">Sean</a>, Powered <span class="by">by</span> <a href="http://tumblr.com">Tumblr</a>.</p>
+	</div>
+
+	{block:ifGoogleAnalyticsID}
+	<!-- Google Analytics Integration -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', '{text:Google Analytics ID}']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	{/block:ifGoogleAnalyticsID}
+
+</body>
+</html>
